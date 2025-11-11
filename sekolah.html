@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senarai Sekolah - Pengurusan Peranti</title>
+    <title>Maklumat Peranti Sekolah</title>
     <!-- Muat naik Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -11,31 +11,247 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Menambah garisan pada header untuk jadual yang kompleks */
+        .details-table th, .details-table td {
+            border: 1px solid #e5e7eb; /* Garisan sempadan kelabu */
+            padding-left: 0.5rem; /* Kurangkan padding (p-2) */
+            padding-right: 0.5rem; /* Kurangkan padding (p-2) */
+            padding-top: 0.5rem; /* Kurangkan padding (p-2) */
+            padding-bottom: 0.5rem; /* Kurangkan padding (p-2) */
+            font-size: 0.75rem; /* text-xs (12px) */
+            line-height: 1rem; /* leading-4 */
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen p-4 md:p-8">
 
-    <div class="max-w-7xl mx-auto">
-        <!-- Tajuk Utama -->
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 pb-4 border-b border-gray-200">
-            Sistem Pengurusan Peranti Sekolah
+    <div class="max-w-full mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl">
+        
+        <!-- Pautan Kembali -->
+        <a href="index.html" class="text-indigo-600 hover:underline mb-4 inline-block text-sm">&larr; Kembali ke Senarai Utama</a>
+
+        <!-- Tajuk Utama Dinamik -->
+        <h1 id="school-name-title" class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b border-gray-200 pb-4">
+            Maklumat Peranti
         </h1>
 
-        <!-- Mesej Memuatkan -->
-        <div id="loading-message" class="text-center text-gray-500 text-lg">
-            <p>Memuatkan senarai sekolah...</p>
+        <!-- BARU: Bahagian Kad Infografik -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            <!-- Kad: Jumlah Peranti -->
+            <div class="bg-white shadow-md rounded-lg p-5 flex items-center space-x-4 border border-gray-200">
+                <div class="flex-shrink-0">
+                    <svg class="h-10 w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21M9 17.25v-10.5a3 3 0 0 0-3-3m3 13.5v-1.007a3 3 0 0 0-.879-2.122L7.5 15M9 17.25h6M9 17.25v-10.5a3 3 0 0 1 3-3m3 13.5v-1.007a3 3 0 0 1 .879-2.122L16.5 15M15 17.25v-10.5a3 3 0 0 0-3-3m3 13.5h-6m6 0v-1.007a3 3 0 0 0 .879-2.122L16.5 15M15 17.25 12.5 21M15 17.25v-10.5a3 3 0 0 0-3-3m0 0a3 3 0 0 0-3 3m6 0v10.5" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-sm font-medium text-gray-500">Jumlah Peranti</div>
+                    <div id="total-devices" class="text-2xl font-bold text-gray-900">0</div>
+                </div>
+            </div>
+            
+            <!-- Kad: Peranti Baik -->
+            <div class="bg-white shadow-md rounded-lg p-5 flex items-center space-x-4 border border-gray-200">
+                <div class="flex-shrink-0">
+                    <svg class="h-10 w-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-sm font-medium text-gray-500">Peranti Baik</div>
+                    <div id="good-devices" class="text-2xl font-bold text-gray-900">0</div>
+                </div>
+            </div>
+
+            <!-- Kad: Peranti Rosak -->
+            <div class="bg-white shadow-md rounded-lg p-5 flex items-center space-x-4 border border-gray-200">
+                <div class="flex-shrink-0">
+                    <svg class="h-10 w-10 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-sm font-medium text-gray-500">Peranti Rosak</div>
+                    <div id="damaged-devices" class="text-2xl font-bold text-gray-900">0</div>
+                </div>
+            </div>
+        </div>
+        <!-- TAMAT: Bahagian Kad Infografik -->
+
+
+        <!-- Butang Tambah -->
+        <div class="mb-4 flex justify-end">
+            <button id="openModalBtn" class="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Tambah Peranti Baru
+            </button>
         </div>
 
-        <!-- Grid Senarai Sekolah (Akan diisi oleh JavaScript) -->
-        <div id="school-list-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Kad Sekolah akan dimasukkan di sini -->
-        </div>
-
-        <!-- Mesej Tiada Data -->
-        <div id="no-data-message" class="hidden text-center text-gray-500 text-lg bg-white p-10 rounded-lg shadow">
-            <p>Tiada data sekolah ditemui. Sila tambah peranti pada halaman butiran untuk memulakan.</p>
+        <!-- Bahagian: Jadual Terperinci -->
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full bg-white details-table">
+                <thead class="text-center">
+                    <!-- Baris Header 1: Kumpulan -->
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th scope="col" rowspan="2" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">
+                            Bil
+                        </th>
+                        <th scope="col" colspan="5" class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            Untuk diisi oleh Pegawai Aset & Juruteknik PPD
+                        </th>
+                        <th scope="col" colspan="4" class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
+                            Untuk diisi oleh sekolah
+                        </th>
+                        <th scope="col" rowspan="2" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">
+                            Catatan
+                        </th>
+                        <th scope="col" rowspan="2" class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider align-middle">
+                            Tindakan
+                        </th>
+                    </tr>
+                    <!-- Baris Header 2: Nama Lajur -->
+                    <tr class="bg-gray-100">
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No Siri</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No Daftar Aset</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No. Siri Pendaftaran</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Status daftar MDM</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Chasis No.</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Nama Murid Penerima</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Kelas</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No Siri Dongle</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No Siri Sim Card</th>
+                    </tr>
+                </thead>
+                <!-- Badan jadual akan diisi oleh JavaScript -->
+                <tbody id="device-table-body" class="divide-y divide-gray-200">
+                    <!-- Baris data akan dimasukkan di sini oleh loadDevices() -->
+                    <tr id="loading-row">
+                        <td colspan="12" class="text-center p-4 text-gray-500">
+                            Memuatkan data peranti...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <!-- Modal (Pop-up) untuk Tambah/Edit Peranti -->
+    <div id="addDeviceModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-10 mx-auto p-5 border w-full max-w-3xl shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center pb-3 border-b bg-gray-50 -mx-5 px-5 pt-4 rounded-t-md">
+                <h3 id="modalTitle" class="text-2xl font-semibold text-indigo-700">Tambah Peranti Baru</h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 mb-2">
+                    <span class="text-2xl">&times;</span>
+                </button>
+            </div>
+            <div class="mt-5">
+                <!-- Borang di sini -->
+                <form id="addDeviceForm">
+                    <!-- Input tersembunyi untuk memegang ID peranti semasa mengedit -->
+                    <input type="hidden" id="editDeviceId" name="editDeviceId">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Bahagian PPD -->
+                        <div class="space-y-3 p-4 border rounded-md bg-gray-50">
+                            <h4 class="text-lg font-medium text-gray-700 border-b pb-2">Maklumat PPD</h4>
+                            <div>
+                                <label for="noSiri" class="block text-sm font-medium text-gray-700">No Siri</label>
+                                <input type="text" name="noSiri" id="noSiri" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="noDaftarAset" class="block text-sm font-medium text-gray-700">No Daftar Aset</label>
+                                <input type="text" name="noDaftarAset" id="noDaftarAset" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="noSiriPendaftaran" class="block text-sm font-medium text-gray-700">No. Siri Pendaftaran</label>
+                                <input type="text" name="noSiriPendaftaran" id="noSiriPendaftaran" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="statusMdm" class="block text-sm font-medium text-gray-700">Status daftar MDM</label>
+                                <select id="statusMdm" name="statusMdm" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option>Sudah</option>
+                                    <option>Belum</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="chasisNo" class="block text-sm font-medium text-gray-700">Chasis No.</label>
+                                <input type="text" name="chasisNo" id="chasisNo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+                        
+                        <!-- Bahagian Sekolah -->
+                        <div class="space-y-3 p-4 border rounded-md bg-gray-50">
+                            <h4 class="text-lg font-medium text-gray-700 border-b pb-2">Maklumat Sekolah</h4>
+                            <div>
+                                <label for="namaMurid" class="block text-sm font-medium text-gray-700">Nama Murid Penerima</label>
+                                <input type="text" name="namaMurid" id="namaMurid" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="kelas" class="block text-sm font-medium text-gray-700">Kelas</label>
+                                <input type="text" name="kelas" id="kelas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="noSiriDongle" class="block text-sm font-medium text-gray-700">No Siri Dongle</label>
+                                <input type="text" name="noSiriDongle" id="noSiriDongle" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="noSiriSim" class="block text-sm font-medium text-gray-700">No Siri Sim Card</label>
+                                <input type="text" name="noSiriSim" id="noSiriSim" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- Catatan (merentasi kedua-dua lajur) -->
+                        <div class="md:col-span-2">
+                             <div>
+                                <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
+                                <textarea name="catatan" id="catatan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Butang Borang -->
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button id="cancelModalBtn" type="button" class="py-2 px-4 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 font-medium">
+                            Batal
+                        </button>
+                        <button type="submit" class="py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 font-medium">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pengesahan Padam -->
+    <div id="confirmDeleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                    <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Padam Peranti</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Adakah anda pasti mahu memadamkan peranti ini? Tindakan ini tidak boleh diubah.
+                    </p>
+                </div>
+                <div class="items-center px-4 py-3 gap-3 flex justify-center">
+                    <button id="cancelDeleteBtn" class="py-2 px-4 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 font-medium">
+                        Batal
+                    </button>
+                    <button id="confirmDeleteBtn" class="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700 font-medium">
+                        Ya, Padam
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Import Firebase -->
     <script type="module">
@@ -48,9 +264,17 @@
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { 
             getFirestore, 
+            doc, 
+            getDoc, 
+            addDoc, 
+            setDoc, 
+            updateDoc, 
+            deleteDoc, 
             onSnapshot, 
             collection, 
-            setLogLevel 
+            query, 
+            where,
+            setLogLevel
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase
@@ -61,16 +285,33 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        setLogLevel('Debug');
+        setLogLevel('Debug'); // Tunjuk log untuk debugging
 
         let userId = null;
         let deviceCollectionPath = '';
-        let unsubscribeDevices = null;
+        let currentSchoolName = ''; // Simpan nama sekolah semasa
+        let unsubscribeDevices = null; // Untuk hentikan listener onSnapshot
 
         // Rujukan DOM
-        const schoolListGrid = document.getElementById('school-list-grid');
-        const loadingMessage = document.getElementById('loading-message');
-        const noDataMessage = document.getElementById('no-data-message');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+        const addDeviceModal = document.getElementById('addDeviceModal');
+        const addDeviceForm = document.getElementById('addDeviceForm');
+        const deviceTableBody = document.getElementById('device-table-body');
+        const modalTitle = document.getElementById('modalTitle');
+        const editDeviceId = document.getElementById('editDeviceId');
+
+        // Rujukan Modal Padam
+        const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        
+        // Rujukan Kad Info
+        const totalDevicesEl = document.getElementById('total-devices');
+        const goodDevicesEl = document.getElementById('good-devices');
+        const damagedDevicesEl = document.getElementById('damaged-devices');
+
 
         // --- AUTH & INITIAL LOAD ---
 
@@ -78,19 +319,24 @@
             if (user) {
                 console.log("Pengguna disahkan:", user.uid);
                 userId = user.uid;
+                // Laluan koleksi peranti peribadi untuk pengguna ini
                 deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
                 
-                // Mula mendengar (listen) untuk data peranti
-                loadAndGroupSchools();
+                // Muatkan nama sekolah dari URL
+                loadSchoolNameFromURL();
                 
+                // Muatkan peranti jika nama sekolah ditemui
+                if (currentSchoolName) {
+                    loadDevices(currentSchoolName);
+                }
             } else {
                 console.log("Tiada pengguna. Sila pastikan anda log masuk.");
-                if (unsubscribeDevices) unsubscribeDevices();
-                loadingMessage.textContent = 'Ralat: Pengesahan gagal. Sila muat semula.';
-                loadingMessage.classList.add('text-red-500');
+                if (unsubscribeDevices) unsubscribeDevices(); // Hentikan listener lama
+                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat: Pengesahan gagal. Sila muat semula.</td></tr>';
             }
         });
 
+        // Mula-mula, cuba log masuk dengan token jika ada
         (async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -100,114 +346,238 @@
                 }
             } catch (error) {
                 console.error("Ralat log masuk:", error);
-                loadingMessage.textContent = 'Ralat: Gagal menyambung ke pangkalan data.';
-                loadingMessage.classList.add('text-red-500');
+                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>';
             }
         })();
 
         // --- FUNGSI UTAMA ---
 
-        function loadAndGroupSchools() {
-            if (unsubscribeDevices) unsubscribeDevices(); // Hentikan listener lama
+        function loadSchoolNameFromURL() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const schoolName = decodeURIComponent(params.get('nama')); 
+                
+                if (schoolName && schoolName !== 'null') {
+                    currentSchoolName = schoolName; // Tetapkan nama sekolah global
+                    document.getElementById('school-name-title').textContent = `Maklumat Peranti Terperinci: ${schoolName}`;
+                    document.title = `Peranti - ${schoolName}`;
+                } else {
+                    document.getElementById('school-name-title').textContent = 'Maklumat Peranti Sekolah';
+                    document.title = 'Maklumat Peranti Sekolah';
+                    deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-gray-500">Tiada sekolah dipilih. Sila kembali ke halaman utama.</td></tr>';
+                }
+            } catch (e) {
+                console.error("Ralat membaca parameter URL:", e);
+                document.getElementById('school-name-title').textContent = 'Maklumat Peranti Sekolah';
+                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat memuatkan nama sekolah.</td></tr>';
+            }
+        }
+
+        // Muatkan peranti dari Firestore menggunakan onSnapshot
+        function loadDevices(schoolName) {
+            console.log(`Memuatkan peranti untuk: ${schoolName}`);
+            
+            // Hentikan listener sebelumnya jika ada
+            if (unsubscribeDevices) {
+                unsubscribeDevices();
+            }
 
             const devicesRef = collection(db, deviceCollectionPath);
+            // Cipta pertanyaan untuk menapis peranti berdasarkan 'schoolName'
+            const q = query(devicesRef, where("schoolName", "==", schoolName));
 
-            unsubscribeDevices = onSnapshot(devicesRef, (snapshot) => {
-                const schools = {}; // Objek untuk mengumpul data sekolah
-
+            unsubscribeDevices = onSnapshot(q, (snapshot) => {
+                deviceTableBody.innerHTML = ''; // Kosongkan jadual
+                
                 if (snapshot.empty) {
-                    loadingMessage.classList.add('hidden');
-                    noDataMessage.classList.remove('hidden');
-                    schoolListGrid.innerHTML = ''; // Kosongkan grid
+                    deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-gray-500">Tiada data peranti ditemui untuk sekolah ini.</td></tr>';
+                    // Tetapkan kad info kepada 0 jika tiada data
+                    totalDevicesEl.textContent = '0';
+                    goodDevicesEl.textContent = '0';
+                    damagedDevicesEl.textContent = '0';
                     return;
                 }
 
-                // 1. Kumpul dan Kumpulan Data
+                let bil = 1; // Nombor bilangan
+                let goodCount = 0;
+                let damagedCount = 0;
+
                 snapshot.docs.forEach((doc) => {
                     const device = doc.data();
-                    const schoolName = device.schoolName;
-
-                    if (!schoolName) return; // Abaikan peranti tanpa nama sekolah
-
-                    // Jika sekolah belum ada dalam objek, cipta
-                    if (!schools[schoolName]) {
-                        schools[schoolName] = {
-                            name: schoolName,
-                            total: 0,
-                            good: 0,
-                            damaged: 0,
-                        };
-                    }
-
-                    // Kira jumlah
-                    schools[schoolName].total++;
                     
-                    // Logik Baik/Rosak (sama seperti details.html)
+                    // --- LOGIK CONTOH UNTUK BAIK/ROSAK ---
+                    // Logik ini menganggap peranti "rosak" jika
+                    // medan 'catatan' mengandungi perkataan "rosak".
+                    // Anda boleh ubah suai logik ini.
                     const catatan = (device.catatan || '').toLowerCase();
                     if (catatan.includes('rosak')) {
-                        schools[schoolName].damaged++;
+                        damagedCount++;
                     } else {
-                        schools[schoolName].good++;
+                        goodCount++;
                     }
+                    // --- TAMAT LOGIK CONTOH ---
+
+                    renderDeviceRow(doc, bil++);
                 });
 
-                // 2. Paparkan Data
-                renderSchoolCards(Object.values(schools));
+                // Kemas kini kad info
+                totalDevicesEl.textContent = snapshot.size;
+                goodDevicesEl.textContent = goodCount;
+                damagedDevicesEl.textContent = damagedCount;
 
             }, (error) => {
-                console.error("Ralat memuatkan data peranti:", error);
-                loadingMessage.textContent = 'Ralat memuatkan data.';
-                loadingMessage.classList.add('text-red-500');
+                console.error("Ralat memuatkan peranti:", error);
+                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat memuatkan data.</td></tr>';
             });
         }
 
-        function renderSchoolCards(schoolDataArray) {
-            // Sembunyikan mesej memuatkan & tiada data
-            loadingMessage.classList.add('hidden');
-            noDataMessage.classList.add('hidden');
+        // Paparkan satu baris peranti dalam jadual
+        function renderDeviceRow(doc, bil) {
+            const device = doc.data();
+            const row = document.createElement('tr');
+            row.className = "odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition-colors duration-150";
             
-            // Kosongkan grid sebelum memaparkan data baru
-            schoolListGrid.innerHTML = '';
+            row.innerHTML = `
+                <td class="whitespace-nowrap text-gray-500">${bil}.</td>
+                <td class="whitespace-nowrap text-gray-700">${device.noSiri || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.noDaftarAset || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.noSiriPendaftaran || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.statusMdm || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.chasisNo || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.namaMurid || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.kelas || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.noSiriDongle || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.noSiriSim || '---'}</td>
+                <td class="whitespace-nowrap text-gray-700">${device.catatan || '---'}</td>
+                <td class="whitespace-nowrap text-center">
+                    <button class="edit-btn px-2.5 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200">Edit</button>
+                    <button class="delete-btn px-2.5 py-0.5 text-xs font-semibold rounded-full bg-red-100 text-red-800 hover:bg-red-200 ml-2">Padam</button>
+                </td>
+            `;
 
-            if (schoolDataArray.length === 0) {
-                noDataMessage.classList.remove('hidden');
-                return;
-            }
+            // Tambah event listener untuk butang edit dan padam
+            row.querySelector('.edit-btn').addEventListener('click', () => handleEdit(doc));
+            row.querySelector('.delete-btn').addEventListener('click', () => handleDelete(doc.id));
 
-            // Cipta kad untuk setiap sekolah
-            schoolDataArray.forEach(school => {
-                const card = document.createElement('div');
-                card.className = 'bg-white p-6 rounded-lg shadow-md border border-gray-100 transition-shadow hover:shadow-lg';
-                
-                // Encode nama sekolah untuk URL (cth, "SMK PUJUT" menjadi "SMK%20PUJUT")
-                const encodedSchoolName = encodeURIComponent(school.name);
-                
-                card.innerHTML = `
-                    <h2 class="text-xl font-bold text-indigo-700 mb-4 truncate">${school.name}</h2>
-                    
-                    <div class="space-y-3 mb-5">
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Jumlah Peranti:</span>
-                            <span class="font-bold text-gray-800 text-base">${school.total}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Peranti Baik:</span>
-                            <span class="font-bold text-green-600 text-base">${school.good}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600">Peranti Rosak:</span>
-                            <span class="font-bold text-red-600 text-base">${school.damaged}</span>
-                        </div>
-                    </div>
-                    
-                    <a href="details.html?nama=${encodedSchoolName}" class="inline-block w-full text-center bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors">
-                        Lihat Butiran
-                    </a>
-                `;
-                
-                schoolListGrid.appendChild(card);
-            });
+            deviceTableBody.appendChild(row);
         }
+
+        // --- PENGENDALIAN MODAL (TAMBAH/EDIT) ---
+
+        // Fungsi untuk tutup modal
+        const closeModal = () => {
+            addDeviceModal.classList.add('hidden');
+            addDeviceForm.reset(); // Kosongkan borang apabila ditutup
+            editDeviceId.value = ''; // Kosongkan ID edit
+        };
+
+        // Buka modal untuk 'Tambah Baru'
+        openModalBtn.addEventListener('click', () => {
+            addDeviceForm.reset();
+            editDeviceId.value = '';
+            modalTitle.textContent = 'Tambah Peranti Baru';
+            addDeviceModal.classList.remove('hidden');
+        });
+
+        // Tutup modal
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelModalBtn.addEventListener('click', closeModal);
+
+        // Kendalikan penghantaran borang (Tambah atau Kemas kini)
+        addDeviceForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Hentikan penghantaran borang
+            
+            // Kumpul data borang
+            const formData = new FormData(addDeviceForm);
+            const deviceData = {
+                schoolName: currentSchoolName, // Tambah nama sekolah
+                noSiri: formData.get('noSiri'),
+                noDaftarAset: formData.get('noDaftarAset'),
+                noSiriPendaftaran: formData.get('noSiriPendaftaran'),
+                statusMdm: formData.get('statusMdm'),
+                chasisNo: formData.get('chasisNo'),
+                namaMurid: formData.get('namaMurid'),
+                kelas: formData.get('kelas'),
+                noSiriDongle: formData.get('noSiriDongle'),
+                noSiriSim: formData.get('noSiriSim'),
+                catatan: formData.get('catatan'),
+            };
+
+            const currentEditId = editDeviceId.value;
+
+            try {
+                if (currentEditId) {
+                    // Kemas kini peranti sedia ada
+                    const docRef = doc(db, deviceCollectionPath, currentEditId);
+                    await updateDoc(docRef, deviceData);
+                    console.log("Peranti dikemas kini:", currentEditId);
+                } else {
+                    // Tambah peranti baru
+                    const docRef = await addDoc(collection(db, deviceCollectionPath), deviceData);
+                    console.log("Peranti baru ditambah:", docRef.id);
+                }
+                closeModal(); // Tutup modal selepas hantar
+            } catch (error) {
+                console.error("Ralat menyimpan peranti:", error);
+                // (Anda boleh menambah mesej ralat dalam modal di sini)
+            }
+        });
+
+        // Kendalikan klik butang 'Edit'
+        function handleEdit(doc) {
+            const device = doc.data();
+            
+            // Isi borang dengan data sedia ada
+            document.getElementById('noSiri').value = device.noSiri || '';
+            document.getElementById('noDaftarAset').value = device.noDaftarAset || '';
+            document.getElementById('noSiriPendaftaran').value = device.noSiriPendaftaran || '';
+            document.getElementById('statusMdm').value = device.statusMdm || 'Sudah';
+            document.getElementById('chasisNo').value = device.chasisNo || '';
+            document.getElementById('namaMurid').value = device.namaMurid || '';
+            document.getElementById('kelas').value = device.kelas || '';
+            document.getElementById('noSiriDongle').value = device.noSiriDongle || '';
+            document.getElementById('noSiriSim').value = device.noSiriSim || '';
+            document.getElementById('catatan').value = device.catatan || '';
+            
+            // Tetapkan ID peranti dalam input tersembunyi
+            editDeviceId.value = doc.id;
+            
+            // Tukar tajuk modal dan tunjukkan
+            modalTitle.textContent = 'Kemaskini Peranti';
+            addDeviceModal.classList.remove('hidden');
+        }
+
+        // --- PENGENDALIAN MODAL (PADAM) ---
+
+        let deviceIdToDelete = null;
+
+        // Tunjukkan modal pengesahan
+        function handleDelete(deviceId) {
+            deviceIdToDelete = deviceId;
+            confirmDeleteModal.classList.remove('hidden');
+        }
+
+        // Batal padam
+        cancelDeleteBtn.addEventListener('click', () => {
+            deviceIdToDelete = null;
+            confirmDeleteModal.classList.add('hidden');
+        });
+
+        // Sahkan padam
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (deviceIdToDelete) {
+                try {
+                    const docRef = doc(db, deviceCollectionPath, deviceIdToDelete);
+                    await deleteDoc(docRef);
+                    console.log("Peranti dipadam:", deviceIdToDelete);
+                } catch (error) {
+                    console.error("Ralat memadam peranti:", error);
+                } finally {
+                    deviceIdToDelete = null;
+                    confirmDeleteModal.classList.add('hidden');
+                }
+            }
+        });
 
     </script>
 
