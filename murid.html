@@ -62,13 +62,14 @@
         </div>
     </div>
 
-    <!-- Import Firebase -->
+    <!-- DIKEMAS KINI: Import Firebase -->
     <script type="module">
         // Import dari SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { 
             getAuth, 
             signInAnonymously, 
+            signInWithCustomToken, 
             onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { 
@@ -79,20 +80,13 @@
             collection, 
             query, 
             where,
+            onSnapshot, // Menggunakan onSnapshot untuk data masa nyata
             setLogLevel
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase anda
-        const firebaseConfig = {
-          apiKey: "AIzaSyCFS-pvVkWgIRXQTfnTvLCzyfe7AtK-3-Q", // <-- TUKAR INI KEPADA KUNCI BARU ANDA
-          authDomain: "sistemmyqr.firebaseapp.com",
-          projectId: "sistemmyqr",
-          storageBucket: "sistemmyqr.firebasestorage.app",
-          messagingSenderId: "414104189979",
-          appId: "1:414104189979:web:acd71a6cccaf9bbd320cbe"
-        };
-        
-        const appId = 'sistemmyqr'; 
+        // DIKEMAS KINI: Konfigurasi Firebase (Dinamik)
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
@@ -109,21 +103,19 @@
         const deviceTableBody = document.getElementById('device-table-body');
         const loadingRow = document.getElementById('loading-row');
         const schoolNameTitle = document.getElementById('school-name-title');
-        const backLink = document.getElementById('back-link'); // Pautan kembali
+        const backLink = document.getElementById('back-link'); 
 
         // --- AUTH & INITIAL LOAD ---
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                console.log("Pengguna disahkan (anonymous):", user.uid);
+                console.log("Pengguna disahkan:", user.uid);
                 userId = user.uid;
                 
                 deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
                 
-                // Muatkan nama sekolah dari URL
                 loadSchoolNameFromURL();
                 
-                // Muatkan peranti jika nama sekolah ditemui
                 if (currentSchoolName) {
                     loadDevices(currentSchoolName); 
                 } else {
@@ -136,12 +128,17 @@
             }
         });
 
+        // DIKEMAS KINI: Log masuk menggunakan token dinamik atau anonim
         (async () => {
             try {
-                await signInAnonymously(auth);
-                console.log("Log masuk anonim berjaya.");
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                console.log("Log masuk berjaya.");
             } catch (error) {
-                console.error("Ralat log masuk anonim:", error);
+                console.error("Ralat log masuk:", error);
                 deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>';
             }
         })();
@@ -157,12 +154,13 @@
                     currentSchoolName = schoolName; 
                     schoolNameTitle.textContent = `Borang Agihan Murid: ${schoolName}`;
                     document.title = `Agihan - ${schoolName}`;
-                    // Tetapkan pautan kembali untuk halaman PPD
-                    backLink.href = `sekolah.html?nama=${encodeURIComponent(currentSchoolName)}`;
+                    // DIKEMAS KINI: Pautan kembali kini merujuk ke index.html, bukan sekolah.html
+                    // Ini adalah pilihan reka bentuk, boleh ditukar kembali jika perlu
+                    backLink.href = 'index.html'; 
                 } else {
                     schoolNameTitle.textContent = 'Borang Agihan Murid';
                     document.title = 'Borang Agihan Murid';
-                    backLink.href = 'index.html'; // Kembali ke index jika tiada nama sekolah
+                    backLink.href = 'index.html';
                 }
             } catch (e) {
                 console.error("Ralat membaca parameter URL:", e);
@@ -192,7 +190,14 @@
 
                 let bil = 1; 
                 
-                snapshot.docs.forEach((doc) => {
+                // DIKEMAS KINI: Isih mengikut no siri untuk konsistensi
+                const sortedDocs = snapshot.docs.sort((a, b) => {
+                    const siriA = a.data().noSiri || '';
+                    const siriB = b.data().noSiri || '';
+                    return siriA.localeCompare(siriB);
+                });
+                
+                sortedDocs.forEach((doc) => {
                     renderDeviceRow(doc, bil++);
                 });
 
@@ -202,20 +207,19 @@
             });
         }
 
-        // Paparkan satu baris peranti dalam jadual (Gaya PMCM)
+        // Paparkan satu baris peranti dalam jadual
         function renderDeviceRow(doc, bil) {
             const device = doc.data();
             const deviceId = doc.id;
             const row = document.createElement('tr');
             row.className = "text-sm";
-            row.setAttribute('data-device-id', deviceId); // Simpan ID peranti pada baris
+            row.setAttribute('data-device-id', deviceId); 
 
             row.innerHTML = `
                 <td class="px-3 py-2 whitespace-nowrap text-gray-500">${bil}.</td>
                 <td class="px-4 py-2 whitespace-nowrap font-medium text-gray-700">${device.noSiri || '---'}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-gray-500 text-xs">${device.catatan || '---'}</td>
                 
-                <!-- Input untuk Sekolah -->
                 <td class="px-3 py-2 whitespace-nowrap">
                     <input type="text" class="table-input murid-nama" value="${device.namaMurid || ''}" placeholder="Nama Murid">
                 </td>
@@ -236,9 +240,7 @@
             
             const saveButton = row.querySelector('.save-btn');
             
-            // Tambah event listener untuk butang 'Simpan'
             saveButton.addEventListener('click', async () => {
-                // Dapatkan data dari input dalam baris ini
                 const namaMurid = row.querySelector('.murid-nama').value;
                 const kelas = row.querySelector('.murid-kelas').value;
                 const noSiriDongle = row.querySelector('.murid-dongle').value;
@@ -248,17 +250,18 @@
                 saveButton.disabled = true;
 
                 try {
-                    // Data untuk dikemas kini
                     const muridData = {
                         namaMurid: namaMurid,
                         kelas: kelas,
                         noSiriDongle: noSiriDongle,
-                        noSiriSim: noSiriSim
+                        noSiriSim: noSiriSim,
+                        // DIKEMAS KINI: Juga kemas kini 'catatan' jika tiada kerosakan dilaporkan
+                        // Ini akan memadamkan 'Rosak' jika ia dibaiki dan diagihkan semula
+                        catatan: device.catatan === 'Rosak' ? 'Rosak' : (namaMurid ? 'Telah Diagih' : '')
                     };
 
                     const docRef = doc(db, deviceCollectionPath, deviceId);
                     
-                    // Guna updateDoc untuk HANYA mengemas kini medan murid
                     await updateDoc(docRef, muridData);
 
                     saveButton.textContent = 'Disimpan';
@@ -276,7 +279,8 @@
                     console.error("Ralat menyimpan data murid:", error);
                     saveButton.textContent = 'Ralat!';
                     saveButton.disabled = false;
-                    alert(`Gagal menyimpan: ${error.message}`);
+                    // DIKEMAS KINI: Tiada lagi alert()
+                    console.error(`Gagal menyimpan: ${error.message}`);
                 }
             });
 
