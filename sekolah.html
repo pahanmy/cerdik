@@ -58,7 +58,7 @@
                     </svg>
                 </div>
                 <div>
-                    <div class="text-sm font-medium text-gray-500">Peranti Baik</div>
+                    <div class="text-sm font-medium text-gray-500">Peranti Telah Diagih</div>
                     <div id="good-devices" class="text-2xl font-bold text-gray-900">0</div>
                 </div>
             </div>
@@ -89,9 +89,6 @@
             </button>
         </div>
 
-        <!-- Penapis Tahun Kohort DIBUANG -->
-        <!-- <div class="mb-4 max-w-xs"> ... </div> -->
-
         <!-- Bahagian: Jadual Terperinci -->
         <div class="overflow-x-auto rounded-lg border border-gray-200">
             <table class="min-w-full bg-white details-table">
@@ -101,11 +98,11 @@
                         <th scope="col" rowspan="2" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">
                             Bil
                         </th>
-                        <th scope="col" colspan="5" class="px-6 py-3 text-xs font-medium uppercase tracking-wider"> <!-- Colspan ditukar dari 6 ke 5 -->
+                        <th scope="col" colspan="5" class="px-6 py-3 text-xs font-medium uppercase tracking-wider">
                             Maklumat Peranti (Diisi oleh PPD)
                         </th>
                         <th scope="col" rowspan="2" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">
-                            Catatan
+                            Catatan (Status)
                         </th>
                         <th scope="col" rowspan="2" class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider align-middle">
                             Tindakan
@@ -118,14 +115,13 @@
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">No. Siri Pendaftaran</th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Status daftar MDM</th>
                         <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Chasis No.</th>
-                        <!-- Tahun Kohort DIBUANG -->
                     </tr>
                 </thead>
                 <!-- Badan jadual akan diisi oleh JavaScript -->
                 <tbody id="device-table-body" class="divide-y divide-gray-200">
                     <!-- Baris data akan dimasukkan di sini oleh loadDevices() -->
                     <tr id="loading-row">
-                        <td colspan="8" class="text-center p-4 text-gray-500"> <!-- Colspan ditukar dari 9 ke 8 -->
+                        <td colspan="8" class="text-center p-4 text-gray-500">
                             Memuatkan data peranti...
                         </td>
                     </tr>
@@ -153,12 +149,9 @@
 
                 <!-- Kandungan Tab Manual -->
                 <div id="manual-tab-content" class="mt-4">
-                    <!-- Borang sedia ada diletakkan di dalam tab ini -->
                     <form id="addDeviceForm">
-                        <!-- Input tersembunyi untuk memegang ID peranti semasa mengedit -->
                         <input type="hidden" id="editDeviceId" name="editDeviceId">
 
-                        <!-- Bahagian PPD Sahaja -->
                         <div class="space-y-3 p-4 border rounded-md bg-gray-50">
                             <h4 class="text-lg font-medium text-gray-700 border-b pb-2">Maklumat Peranti PPD</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -185,20 +178,16 @@
                                     <label for="chasisNo" class="block text-sm font-medium text-gray-700">Chasis No.</label>
                                     <input type="text" name="chasisNo" id="chasisNo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500">
                                 </div>
-                                <!-- Tahun Kohort DIBUANG -->
-                                <!-- <div> ... </div> -->
                             </div>
                             
-                            <!-- Catatan -->
                             <div class="mt-4">
                                  <div>
-                                    <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan</label>
+                                    <label for="catatan" class="block text-sm font-medium text-gray-700">Catatan (cth: Rosak, Hilang, dll)</label>
                                     <textarea name="catatan" id="catatan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-white focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Butang Borang -->
                         <div class="mt-6 flex justify-end space-x-3">
                             <button id="cancelModalBtn" type="button" class="py-2 px-4 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 font-medium">
                                 Batal
@@ -210,14 +199,14 @@
                     </form>
                 </div>
 
-                <!-- Kandungan Tab Tampal Excel (Diringkaskan) -->
+                <!-- Kandungan Tab Tampal Excel -->
                 <div id="batch-tab-content" class="hidden mt-4">
                     <p class="text-sm text-gray-600 mb-2">Tampal data dari Excel (baris dipisahkan oleh 'Enter', lajur dipisahkan oleh 'Tab').</p>
                     <p class="text-xs text-gray-500 mb-2">
-                        <strong>Susunan Lajur (6 lajur):</strong><br> <!-- Ditukar dari 7 ke 6 -->
+                        <strong>Susunan Lajur (6 lajur):</strong><br>
                         1. No Siri, 2. No Daftar Aset, 3. No. Siri Pendaftaran, 4. Status MDM, 5. Chasis No., 6. Catatan
                     </p>
-                    <textarea id="batchDataInput" rows="10" class="w-full border border-gray-300 rounded-md p-2 font-mono text-xs" placeholder="Contoh:&#10;SIRI123	ASET123	DAFTAR123	Sudah	CHASIS123	OK&#10;SIRI456	ASET456	DAFTAR456	Belum	CHASIS456	Rosak"></textarea> <!-- Placeholder dikemas kini -->
+                    <textarea id="batchDataInput" rows="10" class="w-full border border-gray-300 rounded-md p-2 font-mono text-xs" placeholder="Contoh:&#10;SIRI123	ASET123	DAFTAR123	Sudah	CHASIS123	OK&#10;SIRI456	ASET456	DAFTAR456	Belum	CHASIS456	Rosak"></textarea>
                     <div class="mt-4 flex justify-end">
                         <button id="saveBatchBtn" class="py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 font-medium">
                             Simpan Data Batch
@@ -232,7 +221,6 @@
 
     <!-- Modal Pengesahan Padam -->
     <div id="confirmDeleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-        <!-- BARU: Kod HTML modal pengesahan padam yang lengkap -->
         <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
             <div class="mt-3 text-center">
                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
@@ -259,21 +247,20 @@
     </div>
 
 
-    <!-- Import Firebase -->
+    <!-- DIKEMAS KINI: Import Firebase -->
     <script type="module">
         // Import dari SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { 
             getAuth, 
             signInAnonymously, 
+            signInWithCustomToken, 
             onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { 
             getFirestore, 
             doc, 
-            getDoc, 
             addDoc, 
-            setDoc, 
             updateDoc, 
             deleteDoc, 
             onSnapshot, 
@@ -283,17 +270,9 @@
             setLogLevel
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase anda
-        const firebaseConfig = {
-          apiKey: "AIzaSyCFS-pvVkWgIRXQTfnTvLCzyfe7AtK-3-Q", // <-- TUKAR INI KEPADA KUNCI BARU ANDA
-          authDomain: "sistemmyqr.firebaseapp.com",
-          projectId: "sistemmyqr",
-          storageBucket: "sistemmyqr.firebasestorage.app",
-          messagingSenderId: "414104189979",
-          appId: "1:414104189979:web:acd71a6cccaf9bbd320cbe"
-        };
-
-        const appId = 'sistemmyqr'; 
+        // DIKEMAS KINI: Konfigurasi Firebase (Dinamik)
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
@@ -315,9 +294,6 @@
         const deviceTableBody = document.getElementById('device-table-body');
         const modalTitle = document.getElementById('modalTitle');
         const editDeviceId = document.getElementById('editDeviceId');
-
-        // Rujukan DOM untuk Penapis Tahun (DIBUANG)
-        // const yearFilterSelect = document.getElementById('year-filter-select');
 
         // Rujukan DOM untuk Tab dan Batch
         const manualTabBtn = document.getElementById('manualTabBtn');
@@ -343,47 +319,39 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                console.log("Pengguna disahkan (anonymous):", user.uid);
+                console.log("Pengguna disahkan:", user.uid);
                 userId = user.uid;
                 
                 deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
                 
-                // Muatkan nama sekolah dari URL
                 loadSchoolNameFromURL();
                 
-                // Fungsi Penapis Tahun DIBUANG
-                // populateYearFilter();
-
-                // Muatkan peranti jika nama sekolah ditemui
                 if (currentSchoolName) {
-                    // Panggilan dimudahkan, tanpa tahun
                     loadDevices(currentSchoolName); 
                 }
             } else {
                 console.log("Tiada pengguna.");
                 if (unsubscribeDevices) unsubscribeDevices(); 
-                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Pengesahan gagal. Sila muat semula.</td></tr>'; // Colspan 8
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Pengesahan gagal. Sila muat semula.</td></tr>';
             }
         });
 
-        // Log masuk secara anonim sahaja
+        // DIKEMAS KINI: Log masuk menggunakan token dinamik atau anonim
         (async () => {
             try {
-                await signInAnonymously(auth);
-                console.log("Log masuk anonim berjaya.");
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                console.log("Log masuk berjaya.");
             } catch (error) {
-                console.error("Ralat log masuk anonim:", error);
-                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>'; // Colspan 8
+                console.error("Ralat log masuk:", error);
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>';
             }
         })();
 
         // --- FUNGSI UTAMA ---
-
-        // Fungsi Penapis Tahun DIBUANG
-        // function populateYearFilter() { ... }
-
-        // Event listener Penapis Tahun DIBUANG
-        // yearFilterSelect.addEventListener('change', () => { ... });
 
         function loadSchoolNameFromURL() {
             try {
@@ -397,36 +365,31 @@
                 } else {
                     document.getElementById('school-name-title').textContent = 'Maklumat Aset Peranti';
                     document.title = 'Maklumat Aset Peranti';
-                    deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada sekolah dipilih. Sila kembali ke halaman utama.</td></tr>'; // Colspan 8
+                    deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada sekolah dipilih. Sila kembali ke halaman utama.</td></tr>';
                 }
             } catch (e) {
                 console.error("Ralat membaca parameter URL:", e);
                 document.getElementById('school-name-title').textContent = 'Maklumat Aset Peranti';
-                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan nama sekolah.</td></tr>'; // Colspan 8
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan nama sekolah.</td></tr>';
             }
         }
 
         // Muatkan peranti dari Firestore menggunakan onSnapshot
-        function loadDevices(schoolName) { // Dipermudahkan, 'selectedYear' dibuang
+        function loadDevices(schoolName) {
             console.log(`Memuatkan peranti untuk: ${schoolName}`);
-            console.log(`Mendengar di laluan: ${deviceCollectionPath}`);
             
             if (unsubscribeDevices) {
                 unsubscribeDevices();
             }
 
-            // Logik pertanyaan (query) dipermudahkan
             const devicesRef = collection(db, deviceCollectionPath);
-            // Hanya tapis mengikut sekolah. Ini sepatutnya berfungsi tanpa Indeks Komposit
-            // (Selagi Security Rules anda membenarkan 'list' pada koleksi ini)
             const q = query(devicesRef, where("schoolName", "==", schoolName));
-
 
             unsubscribeDevices = onSnapshot(q, (snapshot) => {
                 deviceTableBody.innerHTML = ''; 
                 
                 if (snapshot.empty) {
-                    deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada data peranti ditemui untuk sekolah ini.</td></tr>'; // Colspan 8
+                    deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada data peranti ditemui untuk sekolah ini.</td></tr>';
                     totalDevicesEl.textContent = '0';
                     goodDevicesEl.textContent = '0';
                     damagedDevicesEl.textContent = '0';
@@ -437,13 +400,22 @@
                 let goodCount = 0;
                 let damagedCount = 0;
 
-                snapshot.docs.forEach((doc) => {
+                // DIKEMAS KINI: Isih data mengikut No Siri
+                const sortedDocs = snapshot.docs.sort((a, b) => {
+                    const siriA = a.data().noSiri || '';
+                    const siriB = b.data().noSiri || '';
+                    return siriA.localeCompare(siriB);
+                });
+
+                sortedDocs.forEach((doc) => {
                     const device = doc.data();
                     
                     const catatan = (device.catatan || '').toLowerCase();
                     if (catatan.includes('rosak')) {
                         damagedCount++;
-                    } else {
+                    }
+                    // DIKEMAS KINI: Kira 'Telah Diagih' berdasarkan nama murid
+                    if (device.namaMurid) {
                         goodCount++;
                     }
 
@@ -457,8 +429,7 @@
 
             }, (error) => {
                 console.error("Ralat memuatkan peranti:", error);
-                // Mesej ralat dipermudahkan
-                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan data. (Sila pastikan Security Rules anda ditetapkan dengan betul.)</td></tr>'; // Colspan 8
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan data. (Sila pastikan Security Rules anda ditetapkan dengan betul.)</td></tr>';
             });
         }
 
@@ -468,7 +439,9 @@
             const row = document.createElement('tr');
             row.className = "odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition-colors duration-150";
             
-            const agihMuridLink = `murid.html?id=${doc.id}&sekolah=${encodeURIComponent(device.schoolName || '')}`;
+            // DIKEMAS KINI: Pautan ke murid.html kini menggunakan 'nama' (nama sekolah)
+            // Ini untuk memuatkan SEMUA peranti untuk sekolah itu, bukan satu peranti
+            const agihMuridLink = `murid.html?nama=${encodeURIComponent(device.schoolName || '')}`;
 
             row.innerHTML = `
                 <td class="whitespace-nowrap text-gray-500">${bil}.</td>
@@ -477,16 +450,15 @@
                 <td class="whitespace-nowrap text-gray-700">${device.noSiriPendaftaran || '---'}</td>
                 <td class="whitespace-nowrap text-gray-700">${device.statusMdm || '---'}</td>
                 <td class="whitespace-nowrap text-gray-700">${device.chasisNo || '---'}</td>
-                <!-- Tahun Kohort DIBUANG -->
                 <td class="whitespace-nowrap text-gray-700">${device.catatan || '---'}</td>
                 <td class="whitespace-nowrap text-center text-xs space-x-2">
                     <button class="edit-btn px-2.5 py-0.5 font-semibold rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200">Edit PPD</button>
+                    <!-- DIKEMAS KINI: Pautan kini sama untuk semua baris (menghala ke senarai murid) -->
                     <a href="${agihMuridLink}" class="murid-btn px-2.5 py-0.5 font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200">Agih Murid</a>
                     <button class="delete-btn px-2.5 py-0.5 font-semibold rounded-full bg-red-100 text-red-800 hover:bg-red-200">Padam</button>
                 </td>
             `;
 
-            // Tambah event listener untuk butang edit dan padam
             row.querySelector('.edit-btn').addEventListener('click', () => handleEdit(doc));
             row.querySelector('.delete-btn').addEventListener('click', () => handleDelete(doc.id));
 
@@ -495,7 +467,6 @@
 
         // --- PENGENDALIAN MODAL (TAMBAH/EDIT) ---
 
-        // Fungsi untuk tutup modal
         const closeModal = () => {
             addDeviceModal.classList.add('hidden');
             addDeviceForm.reset(); 
@@ -503,14 +474,12 @@
             batchStatus.textContent = ''; 
             editDeviceId.value = ''; 
             
-            // Reset ke tab manual
             manualTabContent.classList.remove('hidden');
             batchTabContent.classList.add('hidden');
             manualTabBtn.classList.add('text-indigo-600', 'border-indigo-600');
             batchTabBtn.classList.remove('text-indigo-600', 'border-indigo-600');
         };
 
-        // Buka modal untuk 'Tambah Baru'
         openModalBtn.addEventListener('click', () => {
             addDeviceForm.reset();
             editDeviceId.value = '';
@@ -523,15 +492,12 @@
             batchTabBtn.classList.remove('text-indigo-600', 'border-indigo-600');
         });
 
-        // Tutup modal
         closeModalBtn.addEventListener('click', closeModal);
         cancelModalBtn.addEventListener('click', closeModal);
 
-        // Kendalikan penghantaran borang (Tambah atau Kemas kini)
         addDeviceForm.addEventListener('submit', async (e) => {
             e.preventDefault(); 
             
-            // Kumpul data borang (HANYA PPD)
             const formData = new FormData(addDeviceForm);
             const deviceData = {
                 schoolName: currentSchoolName, 
@@ -540,7 +506,6 @@
                 noSiriPendaftaran: formData.get('noSiriPendaftaran'),
                 statusMdm: formData.get('statusMdm'),
                 chasisNo: formData.get('chasisNo'),
-                // tahun: DIBUANG
                 catatan: formData.get('catatan'),
             };
 
@@ -561,17 +526,14 @@
             }
         });
 
-        // Kendalikan klik butang 'Edit'
         function handleEdit(doc) {
             const device = doc.data();
             
-            // Isi borang dengan data sedia ada (HANYA PPD)
             document.getElementById('noSiri').value = device.noSiri || '';
             document.getElementById('noDaftarAset').value = device.noDaftarAset || '';
             document.getElementById('noSiriPendaftaran').value = device.noSiriPendaftaran || '';
             document.getElementById('statusMdm').value = device.statusMdm || 'Sudah';
             document.getElementById('chasisNo').value = device.chasisNo || '';
-            // tahun: DIBUANG
             document.getElementById('catatan').value = device.catatan || '';
             
             editDeviceId.value = doc.id;
@@ -586,7 +548,6 @@
         }
 
         // --- PENGENDALIAN MODAL (PADAM) ---
-        // ... (Tidak berubah) ...
         let deviceIdToDelete = null;
         function handleDelete(deviceId) {
             deviceIdToDelete = deviceId;
@@ -611,7 +572,7 @@
             }
         });
 
-        // LOGIK TAB DAN SIMPAN BATCH (DIKEMAS KINI)
+        // --- LOGIK TAB DAN SIMPAN BATCH ---
         manualTabBtn.addEventListener('click', () => {
             manualTabContent.classList.remove('hidden');
             batchTabContent.classList.add('hidden');
@@ -628,7 +589,6 @@
             manualTabBtn.classList.add('text-gray-600');
         });
 
-        // Logik untuk Simpan Data Batch (DIKEMAS KINI HANYA UNTUK PPD)
         saveBatchBtn.addEventListener('click', async () => {
             const textData = batchDataInput.value.trim();
             if (!textData) {
@@ -657,7 +617,6 @@
                     continue;
                 }
                 
-                // Cipta objek data berdasarkan 6 lajur PPD
                 const deviceData = {
                     schoolName: currentSchoolName,
                     noSiri: fields[0] || '',
@@ -665,13 +624,11 @@
                     noSiriPendaftaran: fields[2] || '',
                     statusMdm: fields[3] || 'Belum', 
                     chasisNo: fields[4] || '',
-                    // tahun: DIBUANG
-                    catatan: fields[5] || '', // Ditukar dari fields[6] ke fields[5]
+                    catatan: fields[5] || '',
                 };
                 promises.push(addDoc(collection(db, deviceCollectionPath), deviceData));
             }
 
-            // Laksanakan semua janji serentak
             try {
                 const results = await Promise.allSettled(promises);
                 
