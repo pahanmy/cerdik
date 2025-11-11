@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borang Agihan Murid</title>
+    <!-- Muat naik Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Menggunakan font Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Storan untuk input dalam jadual (diambil dari pmcm.html) */
+        .table-input {
+            @apply w-full border border-gray-300 rounded-md shadow-sm p-1.5 text-xs focus:ring-indigo-500 focus:border-indigo-500;
+        }
+        .save-btn {
+            @apply bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded disabled:opacity-50 disabled:cursor-not-allowed;
+        }
+        .saved-btn {
+            @apply bg-green-500 text-white text-xs font-bold py-1 px-2 rounded cursor-not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-screen-xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl">
+        
+        <!-- Pautan Kembali (Dinamik) -->
+        <a href="index.html" id="back-link" class="text-indigo-600 hover:underline mb-4 inline-block text-sm">&larr; Kembali ke Papan Pemuka Utama</a>
+
+        <!-- Tajuk Utama Dinamik -->
+        <h1 id="school-name-title" class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b border-gray-200 pb-4">
+            Borang Agihan Murid
+        </h1>
+
+        <!-- Bahagian: Jadual Terperinci -->
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full bg-white divide-y divide-gray-200">
+                <thead class="bg-gray-50 text-center">
+                    <tr class="text-gray-600">
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">Bil</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">No. Siri Peranti</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">Catatan (PPD)</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">Nama Murid</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">Kelas</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">No Siri Dongle</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider align-middle">No Siri Sim Card</th>
+                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium uppercase tracking-wider align-middle">Tindakan</th>
+                    </tr>
+                </thead>
+                <tbody id="device-table-body" class="divide-y divide-gray-200">
+                    <!-- Baris data akan dimasukkan di sini oleh JavaScript -->
+                    <tr id="loading-row">
+                        <td colspan="8" class="text-center p-5 text-gray-500">
+                            Memuatkan data peranti...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Import Firebase -->
+    <script type="module">
+        // Import dari SDK Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInAnonymously, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDocs, 
+            updateDoc, 
+            collection, 
+            query, 
+            where,
+            setLogLevel
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase anda
+        const firebaseConfig = {
+          apiKey: "AIzaSyCFS-pvVkWgIRXQTfnTvLCzyfe7AtK-3-Q", // <-- TUKAR INI KEPADA KUNCI BARU ANDA
+          authDomain: "sistemmyqr.firebaseapp.com",
+          projectId: "sistemmyqr",
+          storageBucket: "sistemmyqr.firebasestorage.app",
+          messagingSenderId: "414104189979",
+          appId: "1:414104189979:web:acd71a6cccaf9bbd320cbe"
+        };
+        
+        const appId = 'sistemmyqr'; 
+
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        setLogLevel('Debug'); 
+
+        let userId = null;
+        let deviceCollectionPath = '';
+        let currentSchoolName = '';
+        let unsubscribeDevices = null;
+
+        // Rujukan DOM
+        const deviceTableBody = document.getElementById('device-table-body');
+        const loadingRow = document.getElementById('loading-row');
+        const schoolNameTitle = document.getElementById('school-name-title');
+        const backLink = document.getElementById('back-link'); // Pautan kembali
+
+        // --- AUTH & INITIAL LOAD ---
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("Pengguna disahkan (anonymous):", user.uid);
+                userId = user.uid;
+                
+                deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
+                
+                // Muatkan nama sekolah dari URL
+                loadSchoolNameFromURL();
+                
+                // Muatkan peranti jika nama sekolah ditemui
+                if (currentSchoolName) {
+                    loadDevices(currentSchoolName); 
+                } else {
+                     deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada sekolah dipilih. Sila kembali ke halaman utama.</td></tr>';
+                }
+            } else {
+                console.log("Tiada pengguna.");
+                if (unsubscribeDevices) unsubscribeDevices(); 
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Pengesahan gagal. Sila muat semula.</td></tr>';
+            }
+        });
+
+        (async () => {
+            try {
+                await signInAnonymously(auth);
+                console.log("Log masuk anonim berjaya.");
+            } catch (error) {
+                console.error("Ralat log masuk anonim:", error);
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>';
+            }
+        })();
+        
+        // --- FUNGSI UTAMA ---
+
+        function loadSchoolNameFromURL() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const schoolName = decodeURIComponent(params.get('nama')); 
+                
+                if (schoolName && schoolName !== 'null') {
+                    currentSchoolName = schoolName; 
+                    schoolNameTitle.textContent = `Borang Agihan Murid: ${schoolName}`;
+                    document.title = `Agihan - ${schoolName}`;
+                    // Tetapkan pautan kembali untuk halaman PPD
+                    backLink.href = `sekolah.html?nama=${encodeURIComponent(currentSchoolName)}`;
+                } else {
+                    schoolNameTitle.textContent = 'Borang Agihan Murid';
+                    document.title = 'Borang Agihan Murid';
+                    backLink.href = 'index.html'; // Kembali ke index jika tiada nama sekolah
+                }
+            } catch (e) {
+                console.error("Ralat membaca parameter URL:", e);
+                schoolNameTitle.textContent = 'Borang Agihan Murid';
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan nama sekolah.</td></tr>';
+            }
+        }
+
+        // Muatkan peranti dari Firestore menggunakan onSnapshot
+        function loadDevices(schoolName) { 
+            console.log(`Memuatkan peranti untuk: ${schoolName}`);
+            
+            if (unsubscribeDevices) {
+                unsubscribeDevices();
+            }
+
+            const devicesRef = collection(db, deviceCollectionPath);
+            const q = query(devicesRef, where("schoolName", "==", schoolName));
+
+            unsubscribeDevices = onSnapshot(q, (snapshot) => {
+                deviceTableBody.innerHTML = ''; 
+                
+                if (snapshot.empty) {
+                    deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-gray-500">Tiada data peranti ditemui untuk sekolah ini.</td></tr>';
+                    return;
+                }
+
+                let bil = 1; 
+                
+                snapshot.docs.forEach((doc) => {
+                    renderDeviceRow(doc, bil++);
+                });
+
+            }, (error) => {
+                console.error("Ralat memuatkan peranti:", error);
+                deviceTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4 text-red-500">Ralat memuatkan data. (Sila pastikan Security Rules anda ditetapkan dengan betul.)</td></tr>';
+            });
+        }
+
+        // Paparkan satu baris peranti dalam jadual (Gaya PMCM)
+        function renderDeviceRow(doc, bil) {
+            const device = doc.data();
+            const deviceId = doc.id;
+            const row = document.createElement('tr');
+            row.className = "text-sm";
+            row.setAttribute('data-device-id', deviceId); // Simpan ID peranti pada baris
+
+            row.innerHTML = `
+                <td class="px-3 py-2 whitespace-nowrap text-gray-500">${bil}.</td>
+                <td class="px-4 py-2 whitespace-nowrap font-medium text-gray-700">${device.noSiri || '---'}</td>
+                <td class="px-4 py-2 whitespace-nowrap text-gray-500 text-xs">${device.catatan || '---'}</td>
+                
+                <!-- Input untuk Sekolah -->
+                <td class="px-3 py-2 whitespace-nowrap">
+                    <input type="text" class="table-input murid-nama" value="${device.namaMurid || ''}" placeholder="Nama Murid">
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                    <input type="text" class="table-input murid-kelas" value="${device.kelas || ''}" placeholder="Kelas">
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                    <input type="text" class="table-input murid-dongle" value="${device.noSiriDongle || ''}" placeholder="No Siri Dongle">
+                </td>
+                <td class="px-3 py-2 whitespace-nowrap">
+                    <input type="text" class="table-input murid-sim" value="${device.noSiriSim || ''}" placeholder="No Siri SIM">
+                </td>
+                
+                <td class="px-3 py-2 whitespace-nowrap text-center">
+                    <button class="save-btn">Simpan</button>
+                </td>
+            `;
+            
+            const saveButton = row.querySelector('.save-btn');
+            
+            // Tambah event listener untuk butang 'Simpan'
+            saveButton.addEventListener('click', async () => {
+                // Dapatkan data dari input dalam baris ini
+                const namaMurid = row.querySelector('.murid-nama').value;
+                const kelas = row.querySelector('.murid-kelas').value;
+                const noSiriDongle = row.querySelector('.murid-dongle').value;
+                const noSiriSim = row.querySelector('.murid-sim').value;
+                
+                saveButton.textContent = 'Menyimpan...';
+                saveButton.disabled = true;
+
+                try {
+                    // Data untuk dikemas kini
+                    const muridData = {
+                        namaMurid: namaMurid,
+                        kelas: kelas,
+                        noSiriDongle: noSiriDongle,
+                        noSiriSim: noSiriSim
+                    };
+
+                    const docRef = doc(db, deviceCollectionPath, deviceId);
+                    
+                    // Guna updateDoc untuk HANYA mengemas kini medan murid
+                    await updateDoc(docRef, muridData);
+
+                    saveButton.textContent = 'Disimpan';
+                    saveButton.classList.remove('save-btn');
+                    saveButton.classList.add('saved-btn');
+
+                    setTimeout(() => {
+                        saveButton.textContent = 'Simpan';
+                        saveButton.classList.remove('saved-btn');
+                        saveButton.classList.add('save-btn');
+                        saveButton.disabled = false;
+                    }, 2000);
+
+                } catch (error) {
+                    console.error("Ralat menyimpan data murid:", error);
+                    saveButton.textContent = 'Ralat!';
+                    saveButton.disabled = false;
+                    alert(`Gagal menyimpan: ${error.message}`);
+                }
+            });
+
+            deviceTableBody.appendChild(row);
+        }
+
+    </script>
+
+</body>
+</html>
