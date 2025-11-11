@@ -35,7 +35,7 @@
             Maklumat Peranti
         </h1>
 
-        <!-- BARU: Bahagian Kad Infografik -->
+        <!-- Bahagian Kad Infografik -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <!-- Kad: Jumlah Peranti -->
             <div class="bg-white shadow-md rounded-lg p-5 flex items-center space-x-4 border border-gray-200">
@@ -83,7 +83,7 @@
         <div class="mb-4 flex justify-end">
             <button id="openModalBtn" class="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110 2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
                 Tambah Peranti Baru
             </button>
@@ -255,11 +255,11 @@
 
     <!-- Import Firebase -->
     <script type="module">
+        // BARU: Import dari SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { 
             getAuth, 
             signInAnonymously, 
-            signInWithCustomToken, 
             onAuthStateChanged 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { 
@@ -277,9 +277,19 @@
             setLogLevel
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        // BARU: Konfigurasi Firebase anda
+        // ** AMARAN: Sila guna KUNCI API BARU yang telah anda jana semula! **
+        const firebaseConfig = {
+          apiKey: "AIzaSyCFS-pvVkWgIRXQTfnTvLCzyfe7AtK-3-Q", // <-- TUKAR INI KEPADA KUNCI BARU ANDA
+          authDomain: "sistemmyqr.firebaseapp.com",
+          projectId: "sistemmyqr",
+          storageBucket: "sistemmyqr.firebasestorage.app",
+          messagingSenderId: "414104189979",
+          appId: "1:414104189979:web:acd71a6cccaf9bbd320cbe" // DIKEMAS KINI
+        };
+
+        // BARU: Tetapkan appId berdasarkan projectId anda
+        const appId = 'sistemmyqr'; // Guna projectId anda sebagai 'appId'
 
         // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
@@ -317,9 +327,11 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                console.log("Pengguna disahkan:", user.uid);
+                console.log("Pengguna disahkan (anonymous):", user.uid);
                 userId = user.uid;
-                // Laluan koleksi peranti peribadi untuk pengguna ini
+                
+                // BARU: Laluan koleksi kini berdasarkan appId yang ditetapkan
+                // PENTING: Anda MESTI tetapkan security rules di Firestore untuk membenarkan laluan ini
                 deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
                 
                 // Muatkan nama sekolah dari URL
@@ -330,22 +342,19 @@
                     loadDevices(currentSchoolName);
                 }
             } else {
-                console.log("Tiada pengguna. Sila pastikan anda log masuk.");
+                console.log("Tiada pengguna.");
                 if (unsubscribeDevices) unsubscribeDevices(); // Hentikan listener lama
                 deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat: Pengesahan gagal. Sila muat semula.</td></tr>';
             }
         });
 
-        // Mula-mula, cuba log masuk dengan token jika ada
+        // BARU: Log masuk secara anonim sahaja
         (async () => {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                await signInAnonymously(auth);
+                console.log("Log masuk anonim berjaya.");
             } catch (error) {
-                console.error("Ralat log masuk:", error);
+                console.error("Ralat log masuk anonim:", error);
                 deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat: Gagal menyambung ke pangkalan data.</td></tr>';
             }
         })();
@@ -376,6 +385,7 @@
         // Muatkan peranti dari Firestore menggunakan onSnapshot
         function loadDevices(schoolName) {
             console.log(`Memuatkan peranti untuk: ${schoolName}`);
+            console.log(`Mendengar di laluan: ${deviceCollectionPath}`);
             
             // Hentikan listener sebelumnya jika ada
             if (unsubscribeDevices) {
@@ -427,7 +437,7 @@
 
             }, (error) => {
                 console.error("Ralat memuatkan peranti:", error);
-                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat memuatkan data.</td></tr>';
+                deviceTableBody.innerHTML = '<tr><td colspan="12" class="text-center p-4 text-red-500">Ralat memuatkan data. (Adakah anda telah menetapkan Security Rules?)</td></tr>';
             });
         }
 
