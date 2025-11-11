@@ -69,23 +69,13 @@
                     Data Peranti CERDIK dan Status Semakan PMCM (2021-2024)
                 </h2>
                 
-                <!-- DIKEMAS KINI: Bekas untuk butang -->
-                <div class="flex flex-col md:flex-row gap-3 mt-3 md:mt-0">
-                    <button id="openModalBtn" class="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110 2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                        </svg>
-                        Daftar Sekolah Baru
-                    </button>
-                    <!-- DIKEMAS KINI: Membetulkan SVG tag yang tidak ditutup dan meletakkan teks di luar SVG -->
-                    <a href="pmcm.html" class="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
-                        </svg>
-                        Sediakan Laporan PMCM Tahunan
-                    </a>
-                </div>
+                <a href="pmcm.html" class="mt-3 md:mt-0 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                    </svg>
+                    Sediakan Laporan PMCM Tahunan
+                </a>
             </div>
 
 
@@ -204,39 +194,6 @@
 
     </div>
 
-    <!-- BARU: Modal (Pop-up) untuk Tambah Sekolah Baru -->
-    <div id="addSchoolModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-        <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white">
-            <div class="flex justify-between items-center pb-3 border-b">
-                <h3 class="text-2xl font-semibold text-gray-800">Daftar Sekolah Baru</h3>
-                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600">
-                    <span class="text-2xl">&times;</span>
-                </button>
-            </div>
-            <div class="mt-5">
-                <form id="addSchoolForm">
-                    <div class="space-y-4">
-                        <div>
-                            <label for="newSchoolName" class="block text-sm font-medium text-gray-700">Sila masukkan nama sekolah baru:</label>
-                            <input type="text" name="newSchoolName" id="newSchoolName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-lg p-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="cth: SK KUALA BARAM">
-                            <p id="schoolNameError" class="text-red-500 text-sm mt-1 hidden">Nama sekolah tidak boleh kosong.</p>
-                            <p id="schoolExistsError" class="text-red-500 text-sm mt-1 hidden">Nama sekolah ini sudah wujud dalam senarai.</p>
-                        </div>
-                    </div>
-                    <!-- Butang Borang -->
-                    <div class="mt-6 flex justify-end space-x-3">
-                        <button id="cancelModalBtn" type="button" class="py-2 px-4 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 font-medium">
-                            Batal
-                        </button>
-                        <button id="submitSchoolBtn" type="submit" class="py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 font-medium">
-                            Daftar Sekolah
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- Skrip untuk Togol (Tidak berubah) -->
     <script>
         const body = document.body;
@@ -285,9 +242,6 @@
             collection, 
             query, 
             onSnapshot,
-            addDoc, // BARU: Untuk menambah sekolah
-            getDocs, // BARU: Untuk menyemak sekolah sedia ada
-            where, // BARU: Untuk menyemak sekolah sedia ada
             setLogLevel
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
@@ -302,8 +256,6 @@
         setLogLevel('Debug'); 
 
         let userId = null;
-        // DIKEMAS KINI: Menambah laluan koleksi baru
-        let schoolCollectionPath = '';
         let deviceCollectionPath = '';
         let pmcmCollectionPath = '';
 
@@ -311,23 +263,9 @@
         const mainTableBody = document.getElementById('main-table-body');
         const loadingRow = document.getElementById('loading-row');
         
-        // Rujukan DOM untuk Modal Sekolah
-        const openModalBtn = document.getElementById('openModalBtn');
-        const addSchoolModal = document.getElementById('addSchoolModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const cancelModalBtn = document.getElementById('cancelModalBtn');
-        const addSchoolForm = document.getElementById('addSchoolForm');
-        const newSchoolNameInput = document.getElementById('newSchoolName');
-        const schoolNameError = document.getElementById('schoolNameError');
-        const schoolExistsError = document.getElementById('schoolExistsError'); // BARU: Ralat pendua
-        const submitSchoolBtn = document.getElementById('submitSchoolBtn'); // BARU: Rujukan butang hantar
-
         // Cache untuk data
-        // DIKEMAS KINI: Menambah cache untuk sekolah
-        let allSchools = [];
         let allDevices = [];
         let allChecks = [];
-        let unsubscribeSchools = null;
         let unsubscribeDevices = null;
         let unsubscribeChecks = null;
 
@@ -338,8 +276,6 @@
                 console.log("Pengguna disahkan:", user.uid);
                 userId = user.uid;
                 
-                // DIKEMAS KINI: Tetapkan semua laluan koleksi
-                schoolCollectionPath = `/artifacts/${appId}/users/${userId}/schools`;
                 deviceCollectionPath = `/artifacts/${appId}/users/${userId}/devices`;
                 pmcmCollectionPath = `/artifacts/${appId}/users/${userId}/pmcm_checks`;
                 
@@ -364,84 +300,14 @@
             }
         })();
 
-        // --- DIKEMAS KINI: LOGIK MODAL TAMBAH SEKOLAH ---
-
-        const closeModal = () => {
-            addSchoolModal.classList.add('hidden');
-            addSchoolForm.reset();
-            schoolNameError.classList.add('hidden');
-            schoolExistsError.classList.add('hidden');
-            submitSchoolBtn.disabled = false;
-            submitSchoolBtn.textContent = 'Daftar Sekolah';
-        };
-
-        openModalBtn.addEventListener('click', () => {
-            addSchoolModal.classList.remove('hidden');
-            newSchoolNameInput.focus();
-        });
-
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelModalBtn.addEventListener('click', closeModal);
-
-        // DIKEMAS KINI: Logik penghantaran borang untuk MENYIMPAN sekolah
-        addSchoolForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const schoolName = newSchoolNameInput.value.trim().toUpperCase(); // Terus tukar ke huruf besar
-
-            // Reset ralat
-            schoolNameError.classList.add('hidden');
-            schoolExistsError.classList.add('hidden');
-
-            if (!schoolName) {
-                schoolNameError.classList.remove('hidden');
-                newSchoolNameInput.focus();
-                return;
-            }
-
-            submitSchoolBtn.disabled = true;
-            submitSchoolBtn.textContent = 'Menyemak...';
-
-            try {
-                // Langkah 1: Semak jika sekolah sudah wujud
-                const q = query(collection(db, schoolCollectionPath), where("schoolName", "==", schoolName));
-                const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    // Sekolah sudah wujud
-                    schoolExistsError.classList.remove('hidden');
-                    submitSchoolBtn.disabled = false;
-                    submitSchoolBtn.textContent = 'Daftar Sekolah';
-                    newSchoolNameInput.focus();
-                    return;
-                }
-
-                // Langkah 2: Jika tidak wujud, tambah sekolah baru
-                submitSchoolBtn.textContent = 'Menyimpan...';
-                const newSchoolDoc = {
-                    schoolName: schoolName,
-                    createdAt: new Date()
-                };
-                await addDoc(collection(db, schoolCollectionPath), newSchoolDoc);
-                
-                console.log("Sekolah baru ditambah:", schoolName);
-                closeModal(); // Tutup modal selepas berjaya
-
-            } catch (error) {
-                console.error("Ralat menambah sekolah:", error);
-                schoolNameError.textContent = `Ralat: ${error.message}`;
-                schoolNameError.classList.remove('hidden');
-                submitSchoolBtn.disabled = false;
-                submitSchoolBtn.textContent = 'Daftar Sekolah';
-            }
-        });
-
-
         // --- FUNGSI UTAMA ---
 
-        // ... (Fungsi createPmcmYearEntry dan createSchoolEntry tidak berubah) ...
+        // Fungsi bantuan untuk mencipta struktur data PMCM
         function createPmcmYearEntry() {
             return { disemak: 0, rosak: 0, baik: 0 };
         }
+        
+        // Fungsi bantuan untuk mencipta struktur data sekolah
         function createSchoolEntry() {
             return {
                 totalDevices: 0,
@@ -450,124 +316,99 @@
                     2022: createPmcmYearEntry(),
                     2023: createPmcmYearEntry(),
                     2024: createPmcmYearEntry(),
-                    2025: createPmcmYearEntry()
+                    2025: createPmcmYearEntry() // Sediakan untuk masa hadapan
                 }
             };
         }
 
-
-        // DIKEMAS KINI: Muatkan data dari TIGA koleksi
+        // Mulakan pendengaran (onSnapshot) untuk kedua-dua koleksi
         function loadDashboardData() {
-            if (unsubscribeSchools) unsubscribeSchools();
             if (unsubscribeDevices) unsubscribeDevices();
             if (unsubscribeChecks) unsubscribeChecks();
 
-            const schoolsQuery = query(collection(db, schoolCollectionPath));
             const devicesQuery = query(collection(db, deviceCollectionPath));
             const checksQuery = query(collection(db, pmcmCollectionPath));
 
-            // Pendengar 1: Senarai Sekolah (Master List)
-            unsubscribeSchools = onSnapshot(schoolsQuery, (snapshot) => {
-                allSchools = snapshot.docs;
-                processData(); 
-            }, (error) => console.error("Ralat memuatkan sekolah:", error));
-
-            // Pendengar 2: Peranti (untuk kiraan)
             unsubscribeDevices = onSnapshot(devicesQuery, (snapshot) => {
                 allDevices = snapshot.docs;
-                processData(); 
+                processData(); // Proses semula data apabila peranti berubah
             }, (error) => console.error("Ralat memuatkan peranti:", error));
 
-            // Pendengar 3: Semakan PMCM (untuk kiraan)
             unsubscribeChecks = onSnapshot(checksQuery, (snapshot) => {
                 allChecks = snapshot.docs;
-                processData(); 
+                processData(); // Proses semula data apabila semakan PMCM berubah
             }, (error) => console.error("Ralat memuatkan PMCM:", error));
         }
 
-        // DIKEMAS KINI: Logik pemprosesan data kini "school-first"
+        // Fungsi untuk memproses data mentah dari cache
         function processData() {
-            // Jangan jalankan jika senarai sekolah belum dimuatkan
-            if (allSchools.length === 0 && allDevices.length === 0 && allChecks.length === 0) {
-                 mainTableBody.innerHTML = `<tr><td colspan="17" class="text-center p-5 text-gray-500">Tiada data ditemui. Sila mulakan dengan 'Daftar Sekolah Baru'.</td></tr>`;
+            if (allDevices.length === 0 && allChecks.length === 0) {
+                 mainTableBody.innerHTML = `<tr><td colspan="17" class="text-center p-5 text-gray-500">Tiada data peranti ditemui. Sila mulakan dengan menambah peranti dalam butang 'Daftar Aset'.</td></tr>`;
                  return;
             }
             
             const schoolData = {};
-            const grandTotals = createSchoolEntry(); 
-            const sortedSchoolNames = [];
+            const grandTotals = createSchoolEntry(); // Guna struktur yang sama untuk jumlah besar
 
-            // Langkah 1: Bina senarai sekolah dari koleksi `schools`
-            allSchools.forEach(doc => {
-                const school = doc.data();
-                const schoolName = school.schoolName;
-                if (!schoolData[schoolName]) {
-                    schoolData[schoolName] = createSchoolEntry();
-                    sortedSchoolNames.push(schoolName);
-                }
-            });
-            
-            // Langkah 2: Kira jumlah peranti
+            // Langkah 1: Kira jumlah peranti
             allDevices.forEach(doc => {
                 const device = doc.data();
                 const schoolName = device.schoolName;
 
-                if (schoolData[schoolName]) {
-                    schoolData[schoolName].totalDevices++;
-                    grandTotals.totalDevices++;
-                }
-                // Jika peranti ada tapi sekolah tiada (isu data lama), tambah sekolah ke senarai
-                else if (schoolName) { 
+                if (!schoolName) return; // Langkau peranti tanpa nama sekolah
+
+                if (!schoolData[schoolName]) {
                     schoolData[schoolName] = createSchoolEntry();
-                    schoolData[schoolName].totalDevices = 1;
-                    grandTotals.totalDevices++;
-                    sortedSchoolNames.push(schoolName);
                 }
+                schoolData[schoolName].totalDevices++;
+                grandTotals.totalDevices++;
             });
             
-            // Langkah 3: Kira data PMCM
+            // Langkah 2: Kira data PMCM
             allChecks.forEach(doc => {
                 const check = doc.data();
                 const schoolName = check.schoolName;
                 const year = check.year;
 
-                // Hanya kira jika sekolah wujud dalam senarai dan tahun disokong
-                if (schoolData[schoolName] && schoolData[schoolName].pmcm[year]) {
-                    const pmcmYear = schoolData[schoolName].pmcm[year];
-                    const totalPmcmYear = grandTotals.pmcm[year];
-                    
-                    if (check.disemak) {
-                        pmcmYear.disemak++;
-                        totalPmcmYear.disemak++;
-                    }
-                    if (check.status === 'Baik') {
-                        pmcmYear.baik++;
-                        totalPmcmYear.baik++;
-                    }
-                    if (check.status === 'Rosak') {
-                        pmcmYear.rosak++;
-                        totalPmcmYear.rosak++;
-                    }
+                // Pastikan sekolah wujud dan tahun disokong
+                if (!schoolData[schoolName] || !schoolData[schoolName].pmcm[year]) {
+                    return;
+                }
+                
+                const pmcmYear = schoolData[schoolName].pmcm[year];
+                const totalPmcmYear = grandTotals.pmcm[year];
+                
+                if (check.disemak) {
+                    pmcmYear.disemak++;
+                    totalPmcmYear.disemak++;
+                }
+                if (check.status === 'Baik') {
+                    pmcmYear.baik++;
+                    totalPmcmYear.baik++;
+                }
+                if (check.status === 'Rosak') {
+                    pmcmYear.rosak++;
+                    totalPmcmYear.rosak++;
                 }
             });
             
-            // Langkah 4: Paparkan jadual
-            renderTable(schoolData, sortedSchoolNames.sort(), grandTotals);
+            // Langkah 3: Paparkan jadual
+            renderTable(schoolData, grandTotals);
         }
 
-        // DIKEMAS KINI: renderTable kini menerima sortedSchoolNames
-        function renderTable(schoolData, sortedSchoolNames, grandTotals) {
+        // Fungsi untuk memaparkan data yang diproses ke dalam jadual
+        function renderTable(schoolData, grandTotals) {
             mainTableBody.innerHTML = ''; // Kosongkan jadual
             
-            if (sortedSchoolNames.length === 0) {
-                 mainTableBody.innerHTML = `<tr><td colspan="17" class="text-center p-5 text-gray-500">Tiada sekolah didaftarkan. Sila klik 'Daftar Sekolah Baru'.</td></tr>`;
-                 // Kosongkan jumlah jika tiada sekolah
-                 renderTotals(createSchoolEntry());
+            const sortedSchools = Object.keys(schoolData).sort();
+            
+            if (sortedSchools.length === 0) {
+                 mainTableBody.innerHTML = `<tr><td colspan="17" class="text-center p-5 text-gray-500">Tiada data peranti ditemui.</td></tr>`;
                  return;
             }
 
             let bil = 1;
-            sortedSchoolNames.forEach(schoolName => {
+            sortedSchools.forEach(schoolName => {
                 const data = schoolData[schoolName];
                 const row = document.createElement('tr');
                 
@@ -575,9 +416,6 @@
                 const linkSekolah = `sekolah.html?nama=${encodeURIComponent(schoolName)}`;
                 const linkMurid = `murid.html?nama=${encodeURIComponent(schoolName)}`;
 
-                // Periksa jika data.pmcm[2022] wujud sebelum cuba akses .rosak
-                const rosak2022 = data.pmcm[2022] ? data.pmcm[2022].rosak : 0;
-                
                 row.innerHTML = `
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">${bil++}.</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${schoolName}</td>
@@ -590,7 +428,7 @@
                     
                     <!-- Data PMCM 2022 -->
                     <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">${data.pmcm[2022].disemak}</td>
-                    <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">${rosak2022}</td>
+                    <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">${data.pmcm[2022].rosak}</td>
                     <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">${data.pmcm[2022].baik}</td>
                     
                     <!-- Data PMCM 2023 -->
@@ -628,7 +466,7 @@
             renderTotals(grandTotals);
         }
 
-        // ... (Fungsi renderTotals tidak berubah) ...
+        // Fungsi untuk memaparkan jumlah keseluruhan
         function renderTotals(totals) {
             document.getElementById('total-devices-all').textContent = totals.totalDevices;
             
