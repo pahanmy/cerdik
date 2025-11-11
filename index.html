@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maklumat Peranti CERDIK PPD Miri</title>
-    <!-- Muat naik Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Menggunakan font Inter */
@@ -46,18 +45,26 @@
 
     <div class="max-w-7xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl">
         
-        <!-- Tajuk Utama -->
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
             Maklumat Peranti CERDIK PPD Miri
         </h1>
 
-        <!-- Bahagian 1: Jadual Gabungan -->
         <div class="mb-10">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">
-                Data Peranti CERDIK dan Status Semakan PMCM (2021-2024)
-            </h2>
+            <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">
+                    Data Peranti CERDIK dan Status Semakan PMCM (2021-2024)
+                </h2>
+                
+                <a href="pmcm.html" class="mt-3 md:mt-0 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                    </svg>
+                    Sediakan Laporan PMCM Tahunan
+                </a>
+            </div>
 
-            <!-- Pilihan Paparan Tahun -->
+
             <div id="year-toggle-controls" class="flex flex-wrap justify-end gap-x-6 gap-y-2 mb-4">
                 <h3 class="text-sm font-medium text-gray-700 w-full text-right">Pilih Tahun Untuk Dipaparkan:</h3>
                 <div class="flex items-center">
@@ -78,11 +85,9 @@
                 </div>
             </div>
             
-            <!-- Kontainer untuk skrol jadual pada peranti mudah alih -->
             <div class="overflow-x-auto rounded-lg border border-gray-200">
                 <table class="min-w-full bg-white divide-y divide-gray-200 complex-table">
                     <thead class="bg-gray-50 text-center">
-                        <!-- Baris Header 1: Tahun -->
                         <tr>
                             <th scope="col" rowspan="2" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider align-middle">
                                 Bil.
@@ -106,7 +111,6 @@
                                 PMCM 2024
                             </th>
                         </tr>
-                        <!-- Baris Header 2: Status PMCM -->
                         <tr>
                             <th scope="col" class="px-3 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider col-2021">Disemak</th>
                             <th scope="col" class="px-3 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider col-2021">Rosak</th>
@@ -131,32 +135,27 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        <!-- Data untuk setiap sekolah (sila masukkan data PMCM) -->
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">1.</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
                                 <a href="sekolah.html?nama=SMK%20PUJUT">SMK PUJUT</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">457</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -169,25 +168,21 @@
                                 <a href="sekolah.html?nama=SMK%20MERBAU">SMK MERBAU</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">478</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -200,25 +195,21 @@
                                 <a href="sekolah.html?nama=SK%20TUDAN">SK TUDAN</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">222</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -231,25 +222,21 @@
                                 <a href="sekolah.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP">SK TEMENGGUNG DATO MUIP</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">207</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -262,25 +249,21 @@
                                 <a href="sekolah.html?nama=SK%20SAYED%20OTHMAN">SK SAYED OTHMAN</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">35</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -293,25 +276,21 @@
                                 <a href="sekolah.html?nama=SK%20RIAM%20BATU%202">SK RIAM BATU 2</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">42</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -324,25 +303,21 @@
                                 <a href="sekolah.html?nama=SK%20LAMBIR%20VILLAGE">SK LAMBIR VILLAGE</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">115</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -355,25 +330,21 @@
                                 <a href="sekolah.html?nama=SK%20KUALA%20BARAM%202">SK KUALA BARAM 2</a>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">69</td>
-                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
-                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
-                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
@@ -381,30 +352,25 @@
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                         </tr>
                     </tbody>
-                    <!-- Jumlah Keseluruhan -->
                     <tfoot class="bg-gray-50">
                         <tr>
                             <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-right">JUMLAH KESELURUHAN</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center">1625</td>
-                            <!-- Jumlah PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
-                            <!-- Jumlah PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
-                            <!-- Jumlah PMCM 2023 -->
+                            <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
+                            <td classf="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
-                            <!-- Jumlah PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
@@ -419,7 +385,6 @@
             </p>
         </div>
 
-        <!-- Bahagian 2: Rumusan Akhir -->
         <div>
             <h2 class="text-xl font-semibold text-gray-700 mb-4">
                 Rumusan Akhir
@@ -443,13 +408,11 @@
             </p>
         </div>
 
-        <!-- Bahagian 3: Rumusan Mengikut Sekolah -->
         <div class="mt-10">
             <h2 class="text-xl font-semibold text-gray-700 mb-4">
                 Rumusan Mengikut Sekolah
             </h2>
             
-            <!-- Jadual Rumusan Mengikut Sekolah -->
             <div class="overflow-x-auto rounded-lg border border-gray-200">
                 <table class="min-w-full bg-white divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -554,7 +517,6 @@
 
     </div>
 
-    <!-- Skrip untuk Togol -->
     <script>
         const body = document.body;
         
