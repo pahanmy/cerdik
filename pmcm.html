@@ -183,7 +183,6 @@
                 const checksSnapshot = await getDocs(checksQuery);
 
                 // Langkah 3: Cipta 'Map' untuk data semakan sedia ada (untuk carian pantas)
-                // Kunci = deviceId, Nilai = data semakan
                 const checksMap = new Map();
                 checksSnapshot.forEach(doc => {
                     checksMap.set(doc.data().deviceId, doc.data());
@@ -192,17 +191,29 @@
                 console.log(`Menjumpai ${deviceSnapshot.size} peranti dan ${checksMap.size} rekod PMCM untuk ${year}.`);
 
                 // Langkah 4: Paparkan jadual
-                pmcmTableBody.innerHTML = ''; // Kosongkan jadual
+                pmcmTableBody.innerHTML = ''; 
                 let bil = 1;
                 
-                deviceSnapshot.docs.forEach((deviceDoc) => {
+                // DIKEMAS KINI: Isih data mengikut Nama Sekolah, kemudian No Siri
+                const sortedDocs = deviceSnapshot.docs.sort((a, b) => {
+                    const schoolA = a.data().schoolName || '';
+                    const schoolB = b.data().schoolName || '';
+                    const siriA = a.data().noSiri || '';
+                    const siriB = b.data().noSiri || '';
+                    
+                    if (schoolA < schoolB) return -1;
+                    if (schoolA > schoolB) return 1;
+                    
+                    // Jika sekolah sama, isih ikut no siri
+                    return siriA.localeCompare(siriB);
+                });
+
+                sortedDocs.forEach((deviceDoc) => {
                     const device = deviceDoc.data();
                     const deviceId = deviceDoc.id;
                     
-                    // Semak jika ada data PMCM sedia ada untuk peranti ini
                     const existingCheck = checksMap.get(deviceId);
                     
-                    // Panggil fungsi untuk memaparkan setiap baris
                     renderPmcmRow(bil++, device, deviceId, existingCheck, year);
                 });
 
@@ -216,7 +227,7 @@
         function renderPmcmRow(bil, device, deviceId, checkData, year) {
             const row = document.createElement('tr');
             row.className = "text-sm";
-            row.setAttribute('data-device-id', deviceId); // Simpan ID peranti pada baris
+            row.setAttribute('data-device-id', deviceId); 
 
             const isChecked = checkData?.disemak || false;
             const status = checkData?.status || '';
@@ -247,19 +258,15 @@
             
             const saveButton = row.querySelector('.save-btn');
             
-            // Tambah event listener untuk butang 'Simpan'
             saveButton.addEventListener('click', async () => {
-                // Dapatkan data dari input dalam baris ini
                 const disemak = row.querySelector('.pmcm-disemak').checked;
                 const status = row.querySelector('.pmcm-status').value;
                 const catatan = row.querySelector('.pmcm-catatan').value;
                 
-                // Tetapkan butang kepada 'Menyimpan...'
                 saveButton.textContent = 'Menyimpan...';
                 saveButton.disabled = true;
 
                 try {
-                    // Cipta data untuk disimpan
                     const pmcmDoc = {
                         deviceId: deviceId,
                         schoolName: device.schoolName,
@@ -267,23 +274,18 @@
                         disemak: disemak,
                         status: status,
                         catatan: catatan,
-                        lastUpdated: new Date() // Simpan tarikh dikemas kini
+                        lastUpdated: new Date() 
                     };
 
-                    // Gunakan ID unik = [DEVICE_ID]_[YEAR]
-                    // Ini membenarkan 'upsert' (update atau insert jika belum wujud)
                     const docId = `${deviceId}_${year}`;
                     const docRef = doc(db, pmcmCollectionPath, docId);
                     
-                    // Guna setDoc untuk cipta/tulis ganti
                     await setDoc(docRef, pmcmDoc);
 
-                    // Beri maklum balas visual
                     saveButton.textContent = 'Disimpan';
                     saveButton.classList.remove('save-btn');
                     saveButton.classList.add('saved-btn');
 
-                    // Kembali kepada 'Simpan' selepas 2 saat
                     setTimeout(() => {
                         saveButton.textContent = 'Simpan';
                         saveButton.classList.remove('saved-btn');
@@ -295,7 +297,8 @@
                     console.error("Ralat menyimpan data PMCM:", error);
                     saveButton.textContent = 'Ralat!';
                     saveButton.disabled = false;
-                    alert(`Gagal menyimpan: ${error.message}`);
+                    // DIKEMAS KINI: Tiada lagi alert()
+                    console.error(`Gagal menyimpan: ${error.message}`);
                 }
             });
 
