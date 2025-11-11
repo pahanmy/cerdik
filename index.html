@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maklumat Peranti CERDIK PPD Miri</title>
+    <!-- Muat naik Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Menggunakan font Inter */
@@ -39,16 +40,30 @@
         body.show-2024 .col-2024 {
             display: table-cell;
         }
+
+        /* DIKEMAS KINI: Storan untuk butang tindakan */
+        .action-btn {
+            /* Menggunakan inline-flex untuk penjajaran ikon + teks */
+            @apply px-2.5 py-1 font-semibold rounded-full text-xs inline-flex items-center justify-center; 
+        }
+        .action-btn-ppd {
+            @apply bg-indigo-100 text-indigo-800 hover:bg-indigo-200;
+        }
+        .action-btn-murid {
+            @apply bg-green-100 text-green-800 hover:bg-green-200;
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-xl">
         
+        <!-- Tajuk Utama -->
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
             Maklumat Peranti CERDIK PPD Miri
         </h1>
 
+        <!-- Bahagian 1: Jadual Gabungan -->
         <div class="mb-10">
             <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-700">
@@ -65,6 +80,7 @@
             </div>
 
 
+            <!-- Pilihan Paparan Tahun -->
             <div id="year-toggle-controls" class="flex flex-wrap justify-end gap-x-6 gap-y-2 mb-4">
                 <h3 class="text-sm font-medium text-gray-700 w-full text-right">Pilih Tahun Untuk Dipaparkan:</h3>
                 <div class="flex items-center">
@@ -85,9 +101,11 @@
                 </div>
             </div>
             
+            <!-- Kontainer untuk skrol jadual pada peranti mudah alih -->
             <div class="overflow-x-auto rounded-lg border border-gray-200">
                 <table class="min-w-full bg-white divide-y divide-gray-200 complex-table">
                     <thead class="bg-gray-50 text-center">
+                        <!-- Baris Header 1: Tahun -->
                         <tr>
                             <th scope="col" rowspan="2" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider align-middle">
                                 Bil.
@@ -110,7 +128,11 @@
                             <th scope="col" colspan="5" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider col-2024">
                                 PMCM 2024
                             </th>
+                            <th scope="col" rowspan="2" class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider align-middle border-l">
+                                Tindakan
+                            </th>
                         </tr>
+                        <!-- Baris Header 2: Status PMCM -->
                         <tr>
                             <th scope="col" class="px-3 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider col-2021">Disemak</th>
                             <th scope="col" class="px-3 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider col-2021">Rosak</th>
@@ -135,247 +157,422 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
+                        <!-- Data untuk setiap sekolah -->
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">1.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SMK%20PUJUT">SMK PUJUT</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SMK PUJUT 
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">457</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SMK%20PUJUT" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SMK%20PUJUT" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SMK%20MERBAU">SMK MERBAU</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SMK MERBAU
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">478</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SMK%20MERBAU" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SMK%20MERBAU" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">3.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20TUDAN">SK TUDAN</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK TUDAN
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">222</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20TUDAN" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20TUDAN" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">4.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP">SK TEMENGGUNG DATO MUIP</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK TEMENGGUNG DATO MUIP
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">207</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">5.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20SAYED%20OTHMAN">SK SAYED OTHMAN</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK SAYED OTHMAN
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">35</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20SAYED%20OTHMAN" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20SAYED%20OTHMAN" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">6.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20RIAM%20BATU%202">SK RIAM BATU 2</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK RIAM BATU 2
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">42</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20RIAM%20BATU%202" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20RIAM%20BATU%202" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">7.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20LAMBIR%20VILLAGE">SK LAMBIR VILLAGE</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK LAMBIR VILLAGE
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">115</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20LAMBIR%20VILLAGE" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20LAMBIR%20VILLAGE" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">8.</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20KUALA%20BARAM%202">SK KUALA BARAM 2</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK KUALA BARAM 2
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">69</td>
+                            <!-- Data PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2021">---</td>
+                            <td class_a="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2021">---</td>
+                            <!-- Data PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2022">---</td>
+                            <!-- Data PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2023">---</td>
+                            <!-- Data PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-red-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-green-600 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-700 text-center col-2024">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-center space-y-2 md:space-y-0 md:space-x-2 border-l">
+                                <a href="sekolah.html?nama=SK%20KUALA%20BARAM%202" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20KUALA%20BARAM%202" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
+                    <!-- Jumlah Keseluruhan -->
                     <tfoot class="bg-gray-50">
                         <tr>
                             <td colspan="2" class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-right">JUMLAH KESELURUHAN</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center">1625</td>
+                            <!-- Jumlah PMCM 2021 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2021">---</td>
+                            <!-- Jumlah PMCM 2022 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2022">---</td>
+                            <!-- Jumlah PMCM 2023 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
-                            <td classf="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
+                            <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2023">---</td>
+                            <!-- Jumlah PMCM 2024 -->
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
                             <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-gray-800 text-center col-2024">---</td>
+                            <td class="border-l"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -385,6 +582,7 @@
             </p>
         </div>
 
+        <!-- Bahagian 2: Rumusan Akhir -->
         <div>
             <h2 class="text-xl font-semibold text-gray-700 mb-4">
                 Rumusan Akhir
@@ -408,11 +606,13 @@
             </p>
         </div>
 
+        <!-- Bahagian 3: Rumusan Mengikut Sekolah -->
         <div class="mt-10">
             <h2 class="text-xl font-semibold text-gray-700 mb-4">
                 Rumusan Mengikut Sekolah
             </h2>
             
+            <!-- Jadual Rumusan Mengikut Sekolah -->
             <div class="overflow-x-auto rounded-lg border border-gray-200">
                 <table class="min-w-full bg-white divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -423,88 +623,225 @@
                             <th scope="col" class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Baik (Terkini)</th>
                             <th scope="col" class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Hilang (Terkini)</th>
                             <th scope="col" class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Dihantar ke PPD (Terkini)</th>
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tindakan</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SMK%20PUJUT">SMK PUJUT</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SMK PUJUT 
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">457</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SMK%20PUJUT" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SMK%20PUJUT" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SMK%20MERBAU">SMK MERBAU</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SMK MERBAU
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">478</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SMK%20MERBAU" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SMK%20MERBAU" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20TUDAN">SK TUDAN</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK TUDAN
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">222</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20TUDAN" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20TUDAN" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP">SK TEMENGGUNG DATO MUIP</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK TEMENGGUNG DATO MUIP
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">207</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20TEMENGGUNG%20DATO%20MUIP" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20SAYED%20OTHMAN">SK SAYED OTHMAN</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK SAYED OTHMAN
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">35</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20SAYED%20OTHMAN" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20SAYED%20OTHMAN" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20RIAM%20BATU%202">SK RIAM BATU 2</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK RIAM BATU 2
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">42</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20RIAM%20BATU%202" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20RIAM%20BATU%202" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20LAMBIR%20VILLAGE">SK LAMBIR VILLAGE</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK LAMBIR VILLAGE
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">115</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20LAMBIR%20VILLAGE" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20LAMBIR%20VILLAGE" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
-                                <a href="sekolah.html?nama=SK%20KUALA%20BARAM%202">SK KUALA BARAM 2</a>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                SK KUALA BARAM 2
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">69</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-red-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-green-600 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700 text-center">---</td>
+                            <!-- DIKEMAS KINI: Lajur Tindakan dengan Ikon dan Teks Baru -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
+                                <a href="sekolah.html?nama=SK%20KUALA%20BARAM%202" class="action-btn action-btn-ppd">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path d="M5.433 13.917l1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                                      <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 1 10 6H4.75A.25.25 0 0 0 4.5 6.25v10.5c0 .138.112.25.25.25h10.5A.25.25 0 0 0 15.5 16V9a.75.75 0 0 1 1.5 0v7A1.75 1.75 0 0 1 14.75 18H4.75A1.75 1.75 0 0 1 3 16.25V6a.25.25 0 0 0-.25-.25H2a.75.75 0 0 1 0-1.5h1.25Z" />
+                                    </svg>
+                                    Daftar Aset
+                                </a>
+                                <a href="murid.html?nama=SK%20KUALA%20BARAM%202" class="action-btn action-btn-murid">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 mr-1">
+                                      <path fill-rule="evenodd" d="M10 2a.75.75 0 0 1 .75.75v.5h3.75a.75.75 0 0 1 0 1.5h-.75v10.5a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V4.75H4.5a.75.75 0 0 1 0-1.5H8.25v-.5A.75.75 0 0 1 10 2ZM8.25 4.75h3.5V3.25h-3.5v1.5Z" clip-rule="evenodd" />
+                                      <path fill-rule="evenodd" d="M7.54 10.843a.75.75 0 1 0-1.06 1.06l1.72 1.72a.75.75 0 0 0 1.06 0l3.182-3.182a.75.75 0 1 0-1.06-1.06l-2.652 2.652-1.19-1.19Z" clip-rule="evenodd" />
+                                    </svg>
+                                    Pelaporan
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -517,6 +854,7 @@
 
     </div>
 
+    <!-- Skrip untuk Togol -->
     <script>
         const body = document.body;
         
@@ -529,7 +867,6 @@
                 body.classList.remove('show-2021');
             }
 
-            // DIBETULKAN: 'toggle-22022' ditukar kepada 'toggle-2022'
             if (document.getElementById('toggle-2022').checked) { 
                 body.classList.add('show-2022');
             } else {
@@ -557,48 +894,6 @@
 
         // Panggil sekali semasa muat naik untuk tetapkan keadaan lalai (2024 sahaja)
         updateDisplay();
-
-
-        // Skrip untuk Rumusan Sekolah (DIBUANG KERANA JADUAL BARU)
-        /*
-        const schoolSelect = document.getElementById('school-select');
-        const summaryDisplay = document.getElementById('school-summary-display');
-        const summaryPlaceholder = document.getElementById('school-summary-placeholder');
-        const summaryTitle = document.getElementById('school-summary-title');
-        
-        // Data placeholder (anda perlu gantikan dengan data sebenar, mungkin dari jadual)
-        const schoolData = {
-            smk_pujut: { name: "SMK PUJUT", total: 457, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            smk_merbau: { name: "SMK MERBAU", total: 478, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_tudan: { name: "SK TUDAN", total: 222, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_temenggung: { name: "SK TEMENGGUNG DATO MUIP", total: 207, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_sayed_othman: { name: "SK SAYED OTHMAN", total: 35, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_riam: { name: "SK RIAM BATU 2", total: 42, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_lambir: { name: "SK LAMBIR VILLAGE", total: 115, rosak: "---", baik: "---", hilang: "---", ppd: "---" },
-            sk_kuala_baram: { name: "SK KUALA BARAM 2", total: 69, rosak: "---", baik: "---", hilang: "---", ppd: "---" }
-        };
-
-        schoolSelect.addEventListener('change', (e) => {
-            const selectedSchoolValue = e.target.value;
-            if (selectedSchoolValue) {
-                const data = schoolData[selectedSchoolValue];
-                
-                // Paparkan data
-                summaryTitle.textContent = `Rumusan untuk ${data.name}`;
-                document.getElementById('school-total').textContent = data.total;
-                document.getElementById('school-rosak').textContent = data.rosak; // Anda perlu dapatkan data 'terkini'
-                document.getElementById('school-baik').textContent = data.baik; // Anda perlu dapatkan data 'terkini'
-                document.getElementById('school-hilang').textContent = data.hilang; // Anda perlu dapatkan data 'terkini'
-                document.getElementById('school-ppd').textContent = data.ppd; // Anda perlu dapatkan data 'terkini'
-
-                summaryDisplay.classList.remove('hidden');
-                summaryPlaceholder.classList.add('hidden');
-            } else {
-                summaryDisplay.classList.add('hidden');
-                summaryPlaceholder.classList.remove('hidden');
-            }
-        });
-        */
     </script>
 
 </body>
